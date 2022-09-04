@@ -48,5 +48,17 @@ namespace TravelClient.Controllers
       Travel.Delete(id);
       return RedirectToAction("Index");
     }
+
+    public ActionResult Create()
+    {
+      return View();
+    }
+
+    [HttpPost]
+    public ActionResult Create(Travel travel)
+    {
+      Travel.Post(travel);
+      return RedirectToAction("Index", "Home");
+    }
   }
 }

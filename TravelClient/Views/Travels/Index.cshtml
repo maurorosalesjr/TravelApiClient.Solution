@@ -1,16 +1,22 @@
+@{
+  Layout = "_Layout";
+}
+
+
 <h1>Globe Hopping</h1>
 
 <ol>
 @foreach (Travel travel in Model)
 {
     <ul>
-        <li>ID: @travel.TravelId</li>
         <li>Location: @travel.Location</li>
-        <li>Country: @travel.Country</li>
-        <li>Blerb: @travel.Blerb</li>
         <li>Rating: @travel.Rating</li>
     </ul>
-    <a href="/Travels/Details/@(travel.TravelId)"><p>View Details</p></a>
+    @* <a href="/Travels/Details/@(travel.TravelId)"><p>View Details</p></a> *@
+    <p>@Html.ActionLink("Location Detail", "Details", new {id = travel.TravelId}) </p>
     <br>
+    
 }
 </ol>
+
+<p>@Html.ActionLink("Add a new location", "Create") </p>

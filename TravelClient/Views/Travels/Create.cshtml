@@ -1,0 +1,24 @@
+@{
+  Layout = "_Layout";
+}
+
+@model TravelClient.Models.Travel
+
+<h1>Add a New Location</h1>
+
+@using (Html.BeginForm())
+{
+  @Html.Label("Where did you visit? ")
+  @Html.TextBoxFor(model => model.Location)
+
+  @Html.Label("What Country was this in?")
+  @Html.TextBoxFor(model => model.Country)
+
+  @Html.Label("What did you get up to?")
+  @Html.TextBoxFor(model => model.Blerb)
+
+  @Html.Label("Rate your trip:")
+  @Html.TextBoxFor(model => model.Rating, new { type="number", min="0", max="10" })
+
+  <input type="submit" value="Add new location" />
+}

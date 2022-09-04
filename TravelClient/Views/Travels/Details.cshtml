@@ -1,0 +1,16 @@
+@{
+  Layout = "_Layout";
+}
+
+@model TravelClient.Models.Travel;
+<h1>Location Details</h1>
+
+  <ul>
+      <li>ID: @Model.TravelId</li>
+      <li>Location: @Model.Location</li>
+      <li>Country: @Model.Country</li>
+      <li>Blerb: @Model.Blerb</li>
+      <li>Rating: @Model.Rating</li>
+  </ul>
+  <br>
+  <p>@Html.ActionLink("Back", "Index", new {}) </p>
