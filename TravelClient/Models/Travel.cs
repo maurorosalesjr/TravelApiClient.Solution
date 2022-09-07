@@ -12,6 +12,7 @@ namespace TravelClient.Models
     public string Country { get; set; }
     public string Blerb { get; set; }
     public int Rating { get; set; }
+    public virtual ApplicationUser User { get; set; }
 
     public static List<Travel> GetTravels()
     {

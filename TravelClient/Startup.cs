@@ -8,6 +8,12 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Identity;
+using TravelClient.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+
+
 
 namespace TravelClient
 {
@@ -24,6 +30,25 @@ namespace TravelClient
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddEntityFrameworkMySql()
+        .AddDbContext<TravelClientContext>(options => options
+        .UseMySql(Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(Configuration["ConnectionStrings:DefaultConnection"])));
+    
+    services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<TravelClientContext>()
+                .AddDefaultTokenProviders();
+
+    //only use this below code if debugging, then remove
+    services.Configure<IdentityOptions>(options =>
+    {
+        options.Password.RequireDigit = false;
+        options.Password.RequiredLength = 0;
+        options.Password.RequireLowercase = false;
+        options.Password.RequireNonAlphanumeric = false;
+        options.Password.RequireUppercase = false;
+        options.Password.RequiredUniqueChars = 0;
+    });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,7 +68,7 @@ namespace TravelClient
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
