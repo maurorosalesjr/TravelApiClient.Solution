@@ -49,16 +49,16 @@ namespace TravelClient.Controllers
       return RedirectToAction("Index");
     }
 
-    public ActionResult Create()
+    public IActionResult Create()
     {
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Travel travel)
+    public IActionResult Create(Travel travel)
     {
       Travel.Post(travel);
-      return RedirectToAction("Index", "Home");
+      return RedirectToAction("Index", "Travels");
     }
   }
 }
